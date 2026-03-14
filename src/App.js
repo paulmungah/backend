@@ -5,12 +5,13 @@ import Addproducts from './components/Addproducts';
 import Signin from './components/Signin';
 import Signup from './components/Signup';
 import Notfound from './components/Notfound';
+import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <Router>
       <div className="App">
       <header className="App-header">
-        <h1>welcome to sokogarden</h1>
+        <h1 className='text-danger '>welcome to sokogarden</h1>
        
       </header>
       {/* Below is our different routes together with the rendered components */}
