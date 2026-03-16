@@ -1,6 +1,6 @@
 import axios from 'axios';
-import React, {useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react'
+import {Link, useNavigate } from 'react-router-dom';
 
 
 
@@ -22,42 +22,42 @@ const Signin = () => {
     e.preventDefault();
 
     // update the loading hook with a message
-    setLoading("Please wait while we authenticat yoyr account...")
-  }
+    setLoading("Please wait while we authenticat yoyr account...");
+  
 
   try{ 
     // create a formData object that will hold the email and the password
-    const formdata = new FormData()
+    const data = new FormData()
     // 10. Insert/append the email and the password on the formData created.
-    formdata.append("email",email);
-     formdata.append("password",password);
+    data.append("email",email);
+    data.append("password",password);
 
     //  interact woth axios for the response
     
-    const response =   axios.post("https://paul-mungah001.alwaysdata.net/api/login",formdata);
+    const response =   axios.post("https://paul-mungah001.alwaysdata.net/api/login",data);
 
     // set the loading hook back to default
     setLoading("");
     // check whether the user exists as part of your response from the API
-    if(response.data.user){
+    if(response.data){
       // if user is there , definitely the details enterd during signin are correct
-      // setSuccess("login successfully")
+      setSuccess("login successfully") 
       // if it is successful, let a person get redirected another page
       navigate("/");
     }
     else{
       // user is not found , that means the credetial on the form are incorrect
-      setError("Login failed. Pleesa try again........")
+      setError("Login failed. Pleesa try again........");
 
     }
   }
   catch(error){
     // set loading back to default
-    setLoading("")
+    setLoading("");
     // update the error hook with a message
-    setError("login failed.try again later.......")
+    setError("login failed.try again later......."); 
 
-  }
+  }};
   return (
     <div className='row justify-content-center mt-4'>
       <div className='col-md-6 shadow p-4'>
@@ -85,6 +85,8 @@ const Signin = () => {
          className='btn btn-primary'
           required /> <br />
 
+          <p className='lest'>Create an account if one is not at disposal <Link to = {'/signup'} className='link'>Sign up</Link></p>
+
 
 
         </form>
@@ -93,4 +95,4 @@ const Signin = () => {
   )
 }
 
-export default Signin 
+export default Signin ;
