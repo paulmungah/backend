@@ -1,6 +1,7 @@
 import axios from 'axios';
-import React, { useState } from 'react'
-import { Await } from 'react-router-dom';
+import React, {useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+
 
 
 const Signin = () => {
@@ -12,11 +13,13 @@ const Signin = () => {
   const [loading, setLoading] = useState("");
   const [success , setSuccess]=useState("");
   const [error, setError] = useState("");
+  // below we have the useNavigate hook hook to redirect us to another page on success login/signin
+  const navigate = useNavigate()
 
   // below is the function to handle the signin action
   const handlesubmit = async (e) => {
     // prevent site from reloading
-    e.preventDefault()
+    e.preventDefault();
 
     // update the loading hook with a message
     setLoading("Please wait while we authenticat yoyr account...")
@@ -30,20 +33,38 @@ const Signin = () => {
      formdata.append("password",password);
 
     //  interact woth axios for the response
-    const response =  axios
+    
+    const response =   axios.post("https://paul-mungah001.alwaysdata.net/api/login",formdata);
 
+    // set the loading hook back to default
+    setLoading("");
+    // check whether the user exists as part of your response from the API
+    if(response.data.user){
+      // if user is there , definitely the details enterd during signin are correct
+      // setSuccess("login successfully")
+      // if it is successful, let a person get redirected another page
+      navigate("/");
+    }
+    else{
+      // user is not found , that means the credetial on the form are incorrect
+      setError("Login failed. Pleesa try again........")
 
-
-
-
+    }
   }
   catch(error){
+    // set loading back to default
+    setLoading("")
+    // update the error hook with a message
+    setError("login failed.try again later.......")
 
   }
   return (
     <div className='row justify-content-center mt-4'>
       <div className='col-md-6 shadow p-4'>
         <h1 className='text-primary'>Sign In</h1>
+        <h5 className='text-info'>{loading}</h5>
+        <h3 className='text-success'>{success}</h3>
+        <h4 className='text-danger'>{error}</h4>
         <form onSubmit={handlesubmit}>
           <input type="email" 
           placeholder='Enter the email address here....'className='form-control'
