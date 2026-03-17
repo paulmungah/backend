@@ -22,7 +22,7 @@ const Signin = () => {
     e.preventDefault();
 
     // update the loading hook with a message
-    setLoading("Please wait while we authenticat yoyr account...");
+    setLoading("Please wait while we authenticate your account...");
   
 
   try{ 
@@ -34,20 +34,20 @@ const Signin = () => {
 
     //  interact woth axios for the response
     
-    const response =   axios.post("https://paul-mungah001.alwaysdata.net/api/login",data);
+    const response =  await axios.post("https://paul-mungah001.alwaysdata.net/api/login",data);
 
     // set the loading hook back to default
     setLoading("");
     // check whether the user exists as part of your response from the API
     if(response.data){
       // if user is there , definitely the details enterd during signin are correct
-      setSuccess("login successfully") 
+      // setSuccess("login successfully") 
       // if it is successful, let a person get redirected another page
       navigate("/");
     }
     else{
       // user is not found , that means the credetial on the form are incorrect
-      setError("Login failed. Pleesa try again........");
+      setError("Login failed. Please try again........");
 
     }
   }
