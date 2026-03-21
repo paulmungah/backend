@@ -4,6 +4,7 @@ import Getproducts from './components/Getproducts';
 import Addproducts from './components/Addproducts';
 import Signin from './components/Signin';
 import Signup from './components/Signup';
+import Makepayment from './components/Makepayment';
 import Notfound from './components/Notfound';
 import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
@@ -11,7 +12,7 @@ function App() {
     <Router>
       <div className="App">
       <header className="App-header">
-        <h1 className='text-danger '>welcome to sokogarden</h1>
+        <h1 className='text-danger'>welcome to sokogarden</h1>
        
       </header>
       {/* Below is our different routes together with the rendered components */}
@@ -21,6 +22,7 @@ function App() {
         <Route path='/signup'element={<Signup/>}/>
         <Route path ='/signin'element={<Signin/>}/>
         <Route path ='*'element={<Notfound/>}/>
+        <Route path='/makepayment'element={<Makepayment/>} />
       </Routes> 
     </div>
     </Router>
